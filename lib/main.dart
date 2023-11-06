@@ -16,10 +16,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Virus Total Api',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(
+            seedColor: const Color.fromARGB(255, 125, 194, 173)),
         useMaterial3: true,
       ),
-      home: const HomePage(),
+      home: HomePage(),
     );
   }
 }
