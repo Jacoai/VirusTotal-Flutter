@@ -5,8 +5,9 @@ sealed class HomePageEvent {}
 
 class HomePageOpened extends HomePageEvent {}
 
-class SubmitOnCheck extends HomePageEvent {
-  final String urlPath;
-
-  SubmitOnCheck({required this.urlPath});
+class AddToCheckQueue extends HomePageEvent {
+  final String path;
+  AddToCheckQueue({required this.path});
 }
+
+class SubmitOnCheck extends HomePageEvent {}
