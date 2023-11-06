@@ -8,12 +8,12 @@ class ReportCheckRepository {
       apikey:
           'b2a12410feba4baf4507b69b29bea00edc9278af5a1f5a3b6ba4be6b95e80747');
 
-  Future<AnalysisData?> getAnalisisReport(String path) async {
-    AnalysisData? result;
+  Future<AnalysisData> getAnalisisReport(String path) async {
+    AnalysisData result;
     try {
       result = await virusTotalClient.check(path);
     } catch (e) {
-      print(e);
+      rethrow;
     }
     return result;
   }

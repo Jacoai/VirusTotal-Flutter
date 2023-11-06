@@ -10,19 +10,12 @@ class VirusTotalCheckUsecase {
 
   final ReportCheckRepository _reportCheckRepository;
 
-  Future<AnalysisData?> check(String path) async {
-    AnalysisData? data = await _reportCheckRepository.getAnalisisReport(path);
-
-    if (data == null) {
+  Future<AnalysisData> check(String path) async {
+    try {
+      AnalysisData data = await _reportCheckRepository.getAnalisisReport(path);
       return data;
+    } catch (e) {
+      rethrow;
     }
-//TODO for devug - remove
-    print('Harmless:${data.attributes.stats.harmless}');
-    print('Malicious:${data.attributes.stats.malicious}');
-    print('Suspicious:${data.attributes.stats.suspicious}');
-    print('Undetected:${data.attributes.stats.undetected}');
-    print('Timeout:${data.attributes.stats.timeout}\n');
-
-    return data;
   }
 }
