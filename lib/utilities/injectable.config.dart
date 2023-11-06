@@ -25,12 +25,9 @@ extension GetItInjectableX on _i1.GetIt {
       environment,
       environmentFilter,
     );
-    gh.singleton<_i3.FileReporRepository>(_i3.FileReporRepository());
-    gh.singleton<_i3.UrlReportRepository>(_i3.UrlReportRepository());
-    gh.singleton<_i4.VirusTotalCheckUsecase>(_i4.VirusTotalCheckUsecase(
-      gh<_i3.FileReporRepository>(),
-      gh<_i3.UrlReportRepository>(),
-    ));
+    gh.singleton<_i3.ReportCheckRepository>(_i3.ReportCheckRepository());
+    gh.singleton<_i4.VirusTotalCheckUsecase>(
+        _i4.VirusTotalCheckUsecase(gh<_i3.ReportCheckRepository>()));
     return this;
   }
 }

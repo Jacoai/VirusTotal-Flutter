@@ -35,7 +35,7 @@ class _HomePageState extends State<HomePage> {
                       onSubmitted: (text) => {
                         context
                             .read<HomePageBloc>()
-                            .add(UrlSubmit(urlPath: text))
+                            .add(SubmitOnCheck(urlPath: text))
                       },
                     );
                   })

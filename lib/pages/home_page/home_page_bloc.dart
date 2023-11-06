@@ -9,8 +9,7 @@ part 'home_page_state.dart';
 class HomePageBloc extends Bloc<HomePageEvent, HomePageState> {
   HomePageBloc() : super(const HomePageState()) {
     on<HomePageOpened>(homePageOpened);
-    on<UrlSubmit>(urlSubmit);
-    on<FileSubmit>(fileSubmit);
+    on<SubmitOnCheck>(submitOnCheck);
   }
 
   late final VirusTotalCheckUsecase _virusTotalCheckUsecase;
@@ -19,11 +18,8 @@ class HomePageBloc extends Bloc<HomePageEvent, HomePageState> {
     _virusTotalCheckUsecase = GetIt.I.get<VirusTotalCheckUsecase>();
   }
 
-  Future<void> urlSubmit(UrlSubmit event, Emitter<HomePageState> emit) async {
-    await _virusTotalCheckUsecase.checkUrl(event.urlPath);
-  }
-
-  Future<void> fileSubmit(FileSubmit event, Emitter<HomePageState> emit) async {
-    await _virusTotalCheckUsecase.checkFile('vf');
+  Future<void> submitOnCheck(
+      SubmitOnCheck event, Emitter<HomePageState> emit) async {
+    await _virusTotalCheckUsecase.check(event.urlPath);
   }
 }

@@ -1,41 +1,20 @@
 import 'package:injectable/injectable.dart';
-import 'package:ui_clen_api_vt/utilities/data_providers/api/src/virul_total_data_file.dart';
-import 'package:ui_clen_api_vt/utilities/data_providers/api/src/virus_total_data_url.dart';
-import 'package:ui_clen_api_vt/utilities/data_providers/api/virus_total_client.dart';
 
-DioClient _virusTotalClient = DioClient();
+import 'package:virus_total_cli/virus_total_cli.dart';
 
 @singleton
-class UrlReportRepository {
-  Future<UrlData?> getUrlReport(String urlPath) async {
-    UrlData? urlData;
-    String? id = await _virusTotalClient.getUrlAnalysisId(urlPath);
-    if (id == null) {
-      return urlData;
-    }
-    urlData = await _virusTotalClient.getUrlAnalysisReport(id);
+class ReportCheckRepository {
+  VirusTotalClient virusTotalClient = VirusTotalClient(
+      apikey:
+          'b2a12410feba4baf4507b69b29bea00edc9278af5a1f5a3b6ba4be6b95e80747');
 
-    if (urlData == null) {
-      print('Error null Urldata');
+  Future<AnalysisData?> getAnalisisReport(String path) async {
+    AnalysisData? result;
+    try {
+      result = await virusTotalClient.check(path);
+    } catch (e) {
+      print(e);
     }
-    return urlData;
-  }
-}
-
-@singleton
-class FileReporRepository {
-  Future<FileData?> getFileReport(String filePath) async {
-    FileData? fileData;
-    String? fileId = await _virusTotalClient.getFileAnalysisId(filePath);
-    if (fileId == null) {
-      print('Error file id null');
-      return fileData;
-    }
-
-    fileData = await _virusTotalClient.getFileAnalysisReport(fileId);
-    if (fileData == null) {
-      print('Error null fileData');
-    }
-    return fileData;
+    return result;
   }
 }
