@@ -39,16 +39,17 @@ class _HomePageState extends State<HomePage> {
                     helperText: 'Ссылку, которую нужно проверить',
                   ),
                   onSubmitted: (text) => {
-                    _bloc.add(AddToCheckQueue(path: text)),
+                    _bloc.add(
+                      AddToCheckQueue(path: text),
+                    ),
                     fieldText.clear(),
                   },
                 ),
               ),
+              //TODO: block button after press
               TextButton(
                 onPressed: () {
-                  _bloc.add(
-                    SubmitOnCheck(),
-                  );
+                  _bloc.add(SubmitOnCheck());
                 },
                 style: const ButtonStyle(
                   backgroundColor: MaterialStatePropertyAll(
