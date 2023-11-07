@@ -11,6 +11,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final _bloc = HomePageBloc();
+  final fieldText = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -29,6 +30,7 @@ class _HomePageState extends State<HomePage> {
               Padding(
                 padding: const EdgeInsets.fromLTRB(15, 30, 10, 10),
                 child: TextField(
+                  controller: fieldText,
                   expands: false,
                   decoration: const InputDecoration(
                     border: OutlineInputBorder(),
@@ -38,6 +40,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                   onSubmitted: (text) => {
                     _bloc.add(AddToCheckQueue(path: text)),
+                    fieldText.clear(),
                   },
                 ),
               ),
