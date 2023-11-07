@@ -23,7 +23,7 @@ dependencies:
   virus_total_cli:
     git:
       url: https://github.com/Jacoai/virus_total_cli.git
-      ref: dataToString
+      ref: main
 
 dev_dependencies:
   flutter_test:

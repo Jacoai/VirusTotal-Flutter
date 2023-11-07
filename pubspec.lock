@@ -612,8 +612,8 @@ packages:
     dependency: "direct main"
     description:
       path: "."
-      ref: dataToString
-      resolved-ref: "71bc037e6922c4e074b39548964c05f3b97b6a52"
+      ref: main
+      resolved-ref: "51fb82633e06b817bd7557392b41b9ef22a31854"
       url: "https://github.com/Jacoai/virus_total_cli.git"
     source: git
     version: "1.0.0"
