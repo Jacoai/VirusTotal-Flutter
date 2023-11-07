@@ -44,39 +44,11 @@ class _HomePageState extends State<HomePage> {
                   },
                 ),
               ),
-              BlocBuilder<HomePageBloc, HomePageState>(
-                builder: (context, state) {
-                  //final List<String> pathsToScan = state.pathsToScan;
-                  //TODO: Create Widget for queue
-                  return Column(
-                    children: [
-                      Row(
-                        children: [
-                          if (state.pathsToScan.isNotEmpty)
-                            ...state.pathsToScan
-                                .map((e) => Text("${e.toString()}  ")),
-                        ],
-                      ),
-                      Column(
-                        children: [
-                          if (state.virusTotalData.isNotEmpty)
-                            ...state.virusTotalData.map((data) => Text(
-                                'Source: ${data.source} \nHarmless:${data.harmless} '
-                                '\nMalicious:${data.malicious} \nSuspicious:${data.suspicious}'
-                                '\nUndetected:${data.undetected}\nTimeout:${data.timeout}\n'
-                                'Date ${DateTime.fromMillisecondsSinceEpoch(data.time * 1000)}\n')),
-                        ],
-                      )
-                    ],
-                  );
-                },
-              ),
               TextButton(
                 onPressed: () {
                   _bloc.add(
                     SubmitOnCheck(),
                   );
-                  //context.read<HomePageBloc>().add(SubmitOnCheck());
                 },
                 style: const ButtonStyle(
                   backgroundColor: MaterialStatePropertyAll(
@@ -90,6 +62,58 @@ class _HomePageState extends State<HomePage> {
                     fontSize: 16,
                   ),
                 ),
+              ),
+              BlocBuilder<HomePageBloc, HomePageState>(
+                builder: (context, state) {
+                  //final List<String> pathsToScan = state.pathsToScan;
+                  //TODO: Create Widget for queue
+                  return ListView.builder(
+                    scrollDirection: Axis.vertical,
+                    shrinkWrap: true,
+                    itemCount: state.pathsToScan.length,
+                    padding: const EdgeInsets.all(10),
+                    itemBuilder: (BuildContext context, int index) {
+                      return Container(
+                        child: Text(state.pathsToScan[index],
+                            style: const TextStyle(fontSize: 22)),
+                      );
+                    },
+                  );
+
+                  // return Column(
+                  //   children: [
+                  //     Expanded(
+                  //       child: ListView.builder(
+                  //         scrollDirection: Axis.vertical,
+                  //         shrinkWrap: true,
+                  //         itemCount: 10,
+                  //         padding: const EdgeInsets.all(10),
+                  //         itemBuilder: (BuildContext context, int index) {
+                  //           return const Text(' fgfg',
+                  //               style: TextStyle(fontSize: 22));
+                  //         },
+                  //       ),
+                  //     ),
+                  //     // Row
+                  //     //   children: [
+                  //     //     if (state.pathsToScan.isNotEmpty)
+                  //     //       ...state.pathsToScan
+                  //     //           .map((e) => Text("${e.toString()}  ")),
+                  //     //   ],
+                  //     // ),
+                  //     Column(
+                  //       children: [
+                  //         if (state.virusTotalData.isNotEmpty)
+                  //           ...state.virusTotalData.map((data) => Text(
+                  //               'Source: ${data.source} \nHarmless:${data.harmless} '
+                  //               '\nMalicious:${data.malicious} \nSuspicious:${data.suspicious}'
+                  //               '\nUndetected:${data.undetected}\nTimeout:${data.timeout}\n'
+                  //               'Date ${DateTime.fromMillisecondsSinceEpoch(data.time * 1000)}\n')),
+                  //       ],
+                  //     )
+                  //   ],
+                  // );
+                },
               ),
             ],
           ),
