@@ -1,4 +1,3 @@
-
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
@@ -23,19 +22,24 @@ class HomePageBloc extends Bloc<HomePageEvent, HomePageState> {
   }
 
   Future<void> addToCheckQueue(
-      AddToCheckQueue event, Emitter<HomePageState> emit) async {
+    AddToCheckQueue event,
+    Emitter<HomePageState> emit,
+  ) async {
     emit(state.copyWith(path: event.path));
   }
 
   Future<void> submitOnCheck(
-      SubmitOnCheck event, Emitter<HomePageState> emit) async {
+    SubmitOnCheck event,
+    Emitter<HomePageState> emit,
+  ) async {
     VirusTotalData? data;
-    for (int i = 0; i < state.pathsToScan.length; i++) {
+    int pathCount = state.pathsToScan.length;
+    for (int i = 0; i < pathCount; i++) {
       try {
         data = convertAnalysisDataToVirusTotalData(
-            await _virusTotalCheckUsecase.check(state.pathsToScan[i]),
-            state.pathsToScan[i]);
-        emit(state.copyWith(data: data));
+            await _virusTotalCheckUsecase.check(state.pathsToScan[0]),
+            state.pathsToScan[0]);
+        emit(HomePageSendState());
       } catch (e, st) {
         print("$e, $st");
       }
