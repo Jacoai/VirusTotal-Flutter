@@ -32,6 +32,7 @@ class HomePageBloc extends Bloc<HomePageEvent, HomePageState> {
     SubmitOnCheck event,
     Emitter<HomePageState> emit,
   ) async {
+    emit(state.copyWith(isSending: true));
     VirusTotalData? data;
     int pathCount = state.pathsToScan.length;
     for (int i = 0; i < pathCount; i++) {
@@ -39,10 +40,13 @@ class HomePageBloc extends Bloc<HomePageEvent, HomePageState> {
         data = convertAnalysisDataToVirusTotalData(
             await _virusTotalCheckUsecase.check(state.pathsToScan[0]),
             state.pathsToScan[0]);
-        emit(HomePageSendState());
+
+        print(data.source);
+        emit(state.copyWith(isSending: true, data: data));
       } catch (e, st) {
         print("$e, $st");
       }
     }
+    emit(state.copyWith(isSending: false));
   }
 }
