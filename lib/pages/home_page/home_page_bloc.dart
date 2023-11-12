@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:meta/meta.dart';
+import 'package:ui_clen_api_vt/utilities/repositories/database_repository.dart';
 import 'package:ui_clen_api_vt/utilities/usecases/check_virus_usecase.dart';
 import 'package:virus_total_cli/virus_total_cli.dart';
 
@@ -17,8 +18,9 @@ class HomePageBloc extends Bloc<HomePageEvent, HomePageState> {
 
   late final VirusTotalCheckUsecase _virusTotalCheckUsecase;
 
-  void homePageOpened(HomePageOpened event, Emitter<HomePageState> emit) {
+  void homePageOpened(HomePageOpened event, Emitter<HomePageState> emit) async {
     _virusTotalCheckUsecase = GetIt.I.get<VirusTotalCheckUsecase>();
+    GetIt.I.get<DatabaseRepository>().init();
   }
 
   Future<void> addToCheckQueue(

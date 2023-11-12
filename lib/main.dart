@@ -1,17 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:get_it/get_it.dart';
+
 import 'package:ui_clen_api_vt/pages/history_page/history_page_view.dart';
 import 'package:ui_clen_api_vt/pages/home_page/home_page_view.dart';
 import 'package:ui_clen_api_vt/utilities/injectable.dart';
-import 'package:ui_clen_api_vt/utilities/repositories/database_repository.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   configureDependencies();
-  final DatabaseRepository databaseRepository =
-      GetIt.I.get<DatabaseRepository>();
-  await databaseRepository.init();
-
   runApp(const MyApp());
 }
 
