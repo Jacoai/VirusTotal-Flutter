@@ -10,9 +10,10 @@ class VirusTotalCheckUsecase {
 
   final ReportCheckRepository _reportCheckRepository;
 
-  Future<AnalysisData> check(String path) async {
+  Future<AnalysisData> check(String path, bool isFile) async {
     try {
-      AnalysisData data = await _reportCheckRepository.getAnalisisReport(path);
+      AnalysisData data =
+          await _reportCheckRepository.getAnalisisReport(path, isFile);
       return data;
     } catch (e) {
       rethrow;

@@ -35,11 +35,14 @@ class HomePageBloc extends Bloc<HomePageEvent, HomePageState> {
     emit(state.copyWith(isSending: true));
     VirusTotalData? data;
     int pathCount = state.pathsToScan.length;
+    bool isFile;
     for (int i = 0; i < pathCount; i++) {
+      isFile = _isFile(state.pathsToScan[0]);
       try {
         data = convertAnalysisDataToVirusTotalData(
-            await _virusTotalCheckUsecase.check(state.pathsToScan[0]),
-            state.pathsToScan[0]);
+            await _virusTotalCheckUsecase.check(state.pathsToScan[0], isFile),
+            state.pathsToScan[0],
+            isFile);
 
         print(data.source);
         emit(state.copyWith(isSending: true, data: data));
@@ -48,5 +51,15 @@ class HomePageBloc extends Bloc<HomePageEvent, HomePageState> {
       }
     }
     emit(state.copyWith(isSending: false));
+  }
+
+  bool _isFile(String path) {
+    RegExp urlRegex = RegExp(
+        r'[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)');
+
+    if (path.contains(urlRegex)) {
+      return false;
+    }
+    return true;
   }
 }
