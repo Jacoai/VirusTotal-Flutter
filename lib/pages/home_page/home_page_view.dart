@@ -16,6 +16,11 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Vuris Total checker'),
+        centerTitle: true,
+        backgroundColor: Colors.green[300],
+      ),
       body: BlocProvider<HomePageBloc>(
         create: (context) => _bloc
           ..add(
@@ -66,54 +71,46 @@ class _HomePageState extends State<HomePage> {
               ),
               BlocBuilder<HomePageBloc, HomePageState>(
                 builder: (context, state) {
-                  //final List<String> pathsToScan = state.pathsToScan;
-                  //TODO: Create Widget for queue
-                  return ListView.builder(
-                    scrollDirection: Axis.vertical,
-                    shrinkWrap: true,
-                    itemCount: state.pathsToScan.length,
-                    padding: const EdgeInsets.all(10),
-                    itemBuilder: (BuildContext context, int index) {
-                      return Container(
-                        child: Text(state.pathsToScan[index],
-                            style: const TextStyle(fontSize: 22)),
-                      );
-                    },
+                  return Column(
+                    children: [
+                      //Queque
+                      ListView.builder(
+                        scrollDirection: Axis.vertical,
+                        shrinkWrap: true,
+                        itemCount: state.pathsToScan.length,
+                        padding: const EdgeInsets.all(10),
+                        itemBuilder: (BuildContext context, int index) {
+                          return Container(
+                            child: Text(state.pathsToScan[index],
+                                style: const TextStyle(fontSize: 22)),
+                          );
+                        },
+                      ),
+                      Column(
+                        children: [
+                          if (state.virusTotalData.isNotEmpty)
+                            ...state.virusTotalData.map((data) => Text(
+                                'Source: ${data.source} \nHarmless:${data.harmless} '
+                                '\nMalicious:${data.malicious} \nSuspicious:${data.suspicious}'
+                                '\nUndetected:${data.undetected}\nTimeout:${data.timeout}\n'
+                                'Date ${DateTime.fromMillisecondsSinceEpoch(data.time * 1000)}\n')),
+                        ],
+                      ),
+                      Column(
+                        children: [
+                          const Text('Посмотреть историю'),
+                          ElevatedButton(
+                            onPressed: () {
+                              Navigator.pushNamed(context, '/history');
+                              //   Navigator.pushReplacementNamed(
+                              //       context, '/history');
+                            },
+                            child: const Text('Посмотреть историю'),
+                          ),
+                        ],
+                      )
+                    ],
                   );
-
-                  // return Column(
-                  //   children: [
-                  //     Expanded(
-                  //       child: ListView.builder(
-                  //         scrollDirection: Axis.vertical,
-                  //         shrinkWrap: true,
-                  //         itemCount: 10,
-                  //         padding: const EdgeInsets.all(10),
-                  //         itemBuilder: (BuildContext context, int index) {
-                  //           return const Text(' fgfg',
-                  //               style: TextStyle(fontSize: 22));
-                  //         },
-                  //       ),
-                  //     ),
-                  //     // Row
-                  //     //   children: [
-                  //     //     if (state.pathsToScan.isNotEmpty)
-                  //     //       ...state.pathsToScan
-                  //     //           .map((e) => Text("${e.toString()}  ")),
-                  //     //   ],
-                  //     // ),
-                  //     Column(
-                  //       children: [
-                  //         if (state.virusTotalData.isNotEmpty)
-                  //           ...state.virusTotalData.map((data) => Text(
-                  //               'Source: ${data.source} \nHarmless:${data.harmless} '
-                  //               '\nMalicious:${data.malicious} \nSuspicious:${data.suspicious}'
-                  //               '\nUndetected:${data.undetected}\nTimeout:${data.timeout}\n'
-                  //               'Date ${DateTime.fromMillisecondsSinceEpoch(data.time * 1000)}\n')),
-                  //       ],
-                  //     )
-                  //   ],
-                  // );
                 },
               ),
             ],
@@ -123,25 +120,3 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
-
-
-
-// BlocBuilder<HomePageBloc, HomePageState>(
-              //   builder: (context, state) {
-              // return Padding(
-              //   padding: const EdgeInsets.fromLTRB(15, 30, 10, 10),
-              //   child: TextField(
-              //     expands: false,
-              //     decoration: const InputDecoration(
-              //       border: OutlineInputBorder(),
-              //       icon: Icon(Icons.login),
-              //       hintText: 'Введте ссылку',
-              //       helperText: 'Ссылку, которую нужно проверить',
-              //     ),
-              //     onSubmitted: (text) => {
-              //       _bloc.add(AddToCheckQueue(path: text)),
-              //     },
-              //   ),
-              // );
-              //   },
-              // )

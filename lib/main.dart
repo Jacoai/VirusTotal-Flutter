@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ui_clen_api_vt/pages/history_page/history_page_view.dart';
 import 'package:ui_clen_api_vt/pages/home_page/home_page_view.dart';
 import 'package:ui_clen_api_vt/utilities/injectable.dart';
 
@@ -14,13 +15,19 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Virus Total Api',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(
-            seedColor: const Color.fromARGB(255, 125, 194, 173)),
+        // colorScheme: ColorScheme.fromSeed(
+        //   seedColor: const Color.fromARGB(255, 125, 194, 173),
+        // ),
         useMaterial3: true,
       ),
-      home: const HomePage(),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => HomePage(),
+        '/history': (context) => HistoryPage(),
+      },
     );
   }
 }
