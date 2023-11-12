@@ -76,50 +76,56 @@ class _HomePageState extends State<HomePage> {
                     return Column(
                       children: [
                         //Queque
-                        Expanded(
-                          child: ListView.builder(
-                            scrollDirection: Axis.vertical,
-                            shrinkWrap: true,
-                            itemCount: state.pathsToScan.length,
-                            padding: const EdgeInsets.all(10),
-                            itemBuilder: (BuildContext context, int index) {
-                              return Container(
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(5),
-                                  border: Border.all(
-                                    color:
-                                        const Color.fromARGB(255, 255, 165, 0),
-                                    width: 4,
-                                  ),
+                        state.pathsToScan.isNotEmpty
+                            ? Expanded(
+                                child: ListView.builder(
+                                  scrollDirection: Axis.vertical,
+                                  shrinkWrap: true,
+                                  itemCount: state.pathsToScan.length,
+                                  padding: const EdgeInsets.all(10),
+                                  itemBuilder:
+                                      (BuildContext context, int index) {
+                                    return Container(
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(5),
+                                        border: Border.all(
+                                          color: const Color.fromARGB(
+                                              255, 255, 165, 0),
+                                          width: 4,
+                                        ),
+                                      ),
+                                      padding: const EdgeInsets.all(3.0),
+                                      child: Text(
+                                        state.pathsToScan[index],
+                                        style: const TextStyle(fontSize: 14),
+                                      ),
+                                    );
+                                  },
                                 ),
-                                padding: const EdgeInsets.all(3.0),
-                                child: Text(
-                                  state.pathsToScan[index],
-                                  style: const TextStyle(fontSize: 14),
+                              )
+                            : Container(),
+                        state.virusTotalData.isNotEmpty
+                            ? Expanded(
+                                flex: 3,
+                                child: ListView.builder(
+                                  scrollDirection: Axis.vertical,
+                                  shrinkWrap: true,
+                                  itemCount: state.virusTotalData.length,
+                                  padding: const EdgeInsets.all(10),
+                                  itemBuilder:
+                                      (BuildContext context, int index) {
+                                    return Container(
+                                      child: Text(
+                                          'Source: ${state.virusTotalData[index].source} \nHarmless:${state.virusTotalData[index].harmless} '
+                                          '\nMalicious:${state.virusTotalData[index].malicious} \nSuspicious:${state.virusTotalData[index].suspicious}'
+                                          '\nUndetected:${state.virusTotalData[index].undetected}\nTimeout:${state.virusTotalData[index].timeout}\n'
+                                          'Date ${DateTime.fromMillisecondsSinceEpoch(state.virusTotalData[index].time * 1000)}\n'
+                                          ''),
+                                    );
+                                  },
                                 ),
-                              );
-                            },
-                          ),
-                        ),
-                        Expanded(
-                          flex: 3,
-                          child: ListView.builder(
-                            scrollDirection: Axis.vertical,
-                            shrinkWrap: true,
-                            itemCount: state.virusTotalData.length,
-                            padding: const EdgeInsets.all(10),
-                            itemBuilder: (BuildContext context, int index) {
-                              return Container(
-                                child: Text(
-                                    'Source: ${state.virusTotalData[index].source} \nHarmless:${state.virusTotalData[index].harmless} '
-                                    '\nMalicious:${state.virusTotalData[index].malicious} \nSuspicious:${state.virusTotalData[index].suspicious}'
-                                    '\nUndetected:${state.virusTotalData[index].undetected}\nTimeout:${state.virusTotalData[index].timeout}\n'
-                                    'Date ${DateTime.fromMillisecondsSinceEpoch(state.virusTotalData[index].time * 1000)}\n'
-                                    ''),
-                              );
-                            },
-                          ),
-                        ),
+                              )
+                            : Container(),
                       ],
                     );
                   },
