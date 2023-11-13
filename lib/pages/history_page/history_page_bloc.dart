@@ -11,6 +11,7 @@ class HistoryPageBloc extends Bloc<HistoryPageEvent, HistoryPageState> {
   HistoryPageBloc() : super(HistoryPageState()) {
     on<HistoryPageOpened>(historyPageOpened);
     on<UpdateValues>(updateValues);
+    on<DeleteRecord>(deleteRecord);
   }
   late final CheckHistoryRepository _checkHistoryRepository;
 
@@ -34,5 +35,12 @@ class HistoryPageBloc extends Bloc<HistoryPageEvent, HistoryPageState> {
     virusTotalData = _checkHistoryRepository.getAll();
 
     emit(state.copyWith(virusTotalData));
+  }
+
+  Future<void> deleteRecord(
+      DeleteRecord event, Emitter<HistoryPageState> emit) async {
+    await _checkHistoryRepository.delete(event.path);
+
+    add(UpdateValues());
   }
 }
