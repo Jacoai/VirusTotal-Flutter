@@ -5,8 +5,10 @@ import 'package:virus_total_cli/virus_total_cli.dart';
 class HistoryCard extends StatelessWidget {
   const HistoryCard(
       {super.key, required this.virusTotalData, required this.historyPageBloc});
+
   final VirusTotalData virusTotalData;
   final HistoryPageBloc historyPageBloc;
+
   @override
   Widget build(BuildContext context) {
     return ExpansionTile(
@@ -22,7 +24,32 @@ class HistoryCard extends StatelessWidget {
         ),
         ElevatedButton(
           onPressed: () {
-            historyPageBloc.add(DeleteRecord(path: virusTotalData.source));
+            showDialog(
+              context: context,
+              builder: (context) {
+                return AlertDialog(
+                  title: const Text('Delete'),
+                  content: Text('Are you sure, that you want to delete'
+                      'the record with sourсe: ${virusTotalData.source}'),
+                  actions: [
+                    TextButton(
+                      onPressed: () {
+                        historyPageBloc
+                            .add(DeleteRecord(path: virusTotalData.source));
+                        Navigator.of(context).pop();
+                      },
+                      child: const Text('Yes, delete'),
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                      child: const Text('No, don\'t delete'),
+                    )
+                  ],
+                );
+              },
+            );
           },
           child: const Icon(Icons.delete_rounded),
         )
@@ -30,40 +57,3 @@ class HistoryCard extends StatelessWidget {
     );
   }
 }
-
-// class HistoryCard extends StatefulWidget {
-//   const HistoryCard(
-//       {Key? key, required this.virusTotalData, required this.historyBlock})
-//       : super(key: key);
-
-//   final VirusTotalData virusTotalData;
-//   final historyBlock;
-//   @override
-//   // ignore: library_private_types_in_public_api
-//   _HistoryCardState createState() => _HistoryCardState();
-// }
-
-// class _HistoryCardState extends State<HistoryCard> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return ExpansionTile(
-//       title: Text(data.source),
-//       subtitle: Text(
-//         '${DateTime.fromMillisecondsSinceEpoch(data.time * 1000)}',
-//       ),
-//       children: [
-//         ListTile(
-//           title: Text('Harmless:${data.harmless} '
-//               '\nMalicious:${data.malicious} \nSuspicious:${data.suspicious}'
-//               '\nUndetected:${data.undetected}\nTimeout:${data.timeout}\n'),
-//         ),
-//         ElevatedButton(
-//           onPressed: () {
-//             widget.historyBlock.add(DeleteRecord(data.source));
-//           },
-//           child: const Icon(Icons.delete_rounded),
-//         )
-//       ],
-//     );
-//   }
-// }
