@@ -2,7 +2,6 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:meta/meta.dart';
-import 'package:ui_clen_api_vt/utilities/repositories/check_history_repository.dart';
 import 'package:ui_clen_api_vt/utilities/usecases/check_virus_usecase.dart';
 import 'package:virus_total_cli/virus_total_cli.dart';
 
@@ -41,13 +40,12 @@ class HomePageBloc extends Bloc<HomePageEvent, HomePageState> {
     for (int i = 0; i < pathCount; i++) {
       try {
         data = await _virusTotalCheckUsecase.check(state.pathsToScan[0]);
-        print(data.source);
+
         emit(state.copyWith(isSending: true, data: data));
       } catch (e, st) {
         print("$e, $st");
       }
     }
-    _virusTotalCheckUsecase.show();
     emit(state.copyWith(isSending: false));
   }
 }
