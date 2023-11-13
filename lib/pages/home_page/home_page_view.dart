@@ -1,3 +1,4 @@
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 
 import 'package:ui_clen_api_vt/pages/home_page/home_page_bloc.dart';
@@ -34,7 +35,7 @@ class _HomePageState extends State<HomePage> {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Padding(
-                padding: const EdgeInsets.fromLTRB(15, 30, 10, 10),
+                padding: const EdgeInsets.fromLTRB(15, 30, 10, 0),
                 child: TextField(
                   controller: fieldText,
                   expands: false,
@@ -50,6 +51,20 @@ class _HomePageState extends State<HomePage> {
                     ),
                     fieldText.clear(),
                   },
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: ElevatedButton(
+                  onPressed: () async {
+                    final result = await FilePicker.platform.pickFiles();
+                    if (result == null) {
+                      return;
+                    }
+                    final file = result.files.first;
+                    _bloc.add(AddToCheckQueue(path: file.path!));
+                  },
+                  child: const Icon(Icons.file_open_outlined),
                 ),
               ),
               //TODO: block button after press
@@ -115,6 +130,7 @@ class _HomePageState extends State<HomePage> {
                                   itemBuilder:
                                       (BuildContext context, int index) {
                                     return Container(
+                                      //TODO: add undetached for file
                                       child: Text(
                                           'Source: ${state.virusTotalData[index].source} \nHarmless:${state.virusTotalData[index].harmless}\n'
                                           'Total ${state.virusTotalData[index].harmless + state.virusTotalData[index].malicious + state.virusTotalData[index].suspicious + state.virusTotalData[index].timeout + state.virusTotalData[index].undetected}\n'
