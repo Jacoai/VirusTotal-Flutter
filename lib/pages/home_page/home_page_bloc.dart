@@ -26,7 +26,7 @@ class HomePageBloc extends Bloc<HomePageEvent, HomePageState> {
     AddToCheckQueue event,
     Emitter<HomePageState> emit,
   ) async {
-    emit(state.copyWith(path: event.path));
+    emit(state.copyWith(path: event.path, isSending: state.isSending));
   }
 
   Future<void> submitOnCheck(
