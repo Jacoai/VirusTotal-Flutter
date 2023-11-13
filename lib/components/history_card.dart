@@ -6,38 +6,25 @@ class HistoryCard extends StatefulWidget {
 
   final VirusTotalData virusTotalData;
   @override
+  // ignore: library_private_types_in_public_api
   _HistoryCardState createState() => _HistoryCardState();
 }
 
 class _HistoryCardState extends State<HistoryCard> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(10),
-      decoration: BoxDecoration(
-        border: Border.all(
-          color: const Color.fromARGB(255, 255, 0, 0),
-          width: 15,
+    return ExpansionTile(
+      title: Text(widget.virusTotalData.source),
+      subtitle: Text(
+        '${DateTime.fromMillisecondsSinceEpoch(widget.virusTotalData.time * 1000)}',
+      ),
+      children: [
+        ListTile(
+          title: Text('Harmless:${widget.virusTotalData.harmless} '
+              '\nMalicious:${widget.virusTotalData.malicious} \nSuspicious:${widget.virusTotalData.suspicious}'
+              '\nUndetected:${widget.virusTotalData.undetected}\nTimeout:${widget.virusTotalData.timeout}\n'),
         ),
-      ),
-      child: ExpansionPanelList(
-        children: [
-          ExpansionPanel(
-            headerBuilder: (context, isOpen) {
-              return Text(widget.virusTotalData.source);
-            },
-            body: Text(
-                '\nMalicious:${widget.virusTotalData.malicious} \nSuspicious:${widget.virusTotalData.suspicious}'
-                '\nUndetected:${widget.virusTotalData.undetected}\nTimeout:${widget.virusTotalData.timeout}\n'
-                'Date ${DateTime.fromMillisecondsSinceEpoch(widget.virusTotalData.time * 1000)}\n'),
-          )
-        ],
-      ),
+      ],
     );
-    // child: Text(
-    //     'Source: ${widget.virusTotalData.source} \nHarmless:${widget.virusTotalData.harmless} '
-    //     '\nMalicious:${widget.virusTotalData.malicious} \nSuspicious:${widget.virusTotalData.suspicious}'
-    //     '\nUndetected:${widget.virusTotalData.undetected}\nTimeout:${widget.virusTotalData.timeout}\n'
-    //     'Date ${DateTime.fromMillisecondsSinceEpoch(widget.virusTotalData.time * 1000)}\n'),
   }
 }
