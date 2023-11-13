@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:ui_clen_api_vt/components/history_card.dart';
 import 'package:ui_clen_api_vt/pages/history_page/history_page_bloc.dart';
 
 class HistoryPage extends StatefulWidget {
@@ -32,13 +33,15 @@ class _HistoryPageState extends State<HistoryPage> {
                       child: ListView.builder(
                         itemCount: state.virusTotalData.length,
                         itemBuilder: (BuildContext context, int index) {
-                          return Container(
-                            child: Text(
-                                'Source: ${state.virusTotalData[index].source} \nHarmless:${state.virusTotalData[index].harmless} '
-                                '\nMalicious:${state.virusTotalData[index].malicious} \nSuspicious:${state.virusTotalData[index].suspicious}'
-                                '\nUndetected:${state.virusTotalData[index].undetected}\nTimeout:${state.virusTotalData[index].timeout}\n'
-                                'Date ${DateTime.fromMillisecondsSinceEpoch(state.virusTotalData[index].time * 1000)}\n'),
-                          );
+                          return HistoryCard(
+                              virusTotalData: state.virusTotalData[index]);
+                          // return Container(
+                          //   child: Text(
+                          //       'Source: ${state.virusTotalData[index].source} \nHarmless:${state.virusTotalData[index].harmless} '
+                          //       '\nMalicious:${state.virusTotalData[index].malicious} \nSuspicious:${state.virusTotalData[index].suspicious}'
+                          //       '\nUndetected:${state.virusTotalData[index].undetected}\nTimeout:${state.virusTotalData[index].timeout}\n'
+                          //       'Date ${DateTime.fromMillisecondsSinceEpoch(state.virusTotalData[index].time * 1000)}\n'),
+                          // );
                         },
                       ),
                     ),
