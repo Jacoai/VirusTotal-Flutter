@@ -12,6 +12,10 @@ class HistoryPageBloc extends Bloc<HistoryPageEvent, HistoryPageState> {
     on<HistoryPageOpened>(historyPageOpened);
     on<UpdateValues>(updateValues);
     on<DeleteRecord>(deleteRecord);
+    on<DeleteAllHistory>(deleteAllHistory);
+    on<FileDeleteAllHistory>(fileDeleteAllHistory);
+    on<LinkDeleteAllHistory>(linkDeleteAllHistory);
+    on<RescanRecord>(rescanRecord);
   }
   late final CheckHistoryRepository _checkHistoryRepository;
 
@@ -39,8 +43,28 @@ class HistoryPageBloc extends Bloc<HistoryPageEvent, HistoryPageState> {
 
   Future<void> deleteRecord(
       DeleteRecord event, Emitter<HistoryPageState> emit) async {
-    await _checkHistoryRepository.delete(event.path);
-
+    //await _checkHistoryRepository.delete(event.path);
+    print('Emitted DeleteRecord event ');
     add(UpdateValues());
+  }
+
+  Future<void> deleteAllHistory(
+      DeleteAllHistory event, Emitter<HistoryPageState> emit) async {
+    print('Emitted DeleteAllHistory event ');
+  }
+
+  Future<void> fileDeleteAllHistory(
+      FileDeleteAllHistory event, Emitter<HistoryPageState> emit) async {
+    print('Emitted FileDeleteAllHistory event ');
+  }
+
+  Future<void> linkDeleteAllHistory(
+      LinkDeleteAllHistory event, Emitter<HistoryPageState> emit) async {
+    print('Emitted LinkDeleteAllHistory event ');
+  }
+
+  Future<void> rescanRecord(
+      RescanRecord event, Emitter<HistoryPageState> emit) async {
+    print('Emitted RecheckRecord event ');
   }
 }

@@ -11,3 +11,14 @@ class DeleteRecord extends HistoryPageEvent {
   final String path;
   DeleteRecord({required this.path});
 }
+
+class DeleteAllHistory extends HistoryPageEvent {}
+
+class FileDeleteAllHistory extends HistoryPageEvent {}
+
+class LinkDeleteAllHistory extends HistoryPageEvent {}
+
+class RescanRecord extends HistoryPageEvent {
+  final String path;
+  RescanRecord({required this.path});
+}
