@@ -67,10 +67,13 @@ class _HomePageState extends State<HomePage> {
                   child: const Icon(Icons.file_open_outlined),
                 ),
               ),
-              //TODO: block button after press
               TextButton(
                 onPressed: () {
-                  _bloc.add(SubmitOnCheck());
+                  if (_bloc.state.isSending == true) {
+                    return;
+                  } else {
+                    _bloc.add(SubmitOnCheck());
+                  }
                 },
                 style: const ButtonStyle(
                   backgroundColor: MaterialStatePropertyAll(
@@ -146,7 +149,6 @@ class _HomePageState extends State<HomePage> {
                   },
                 ),
               ),
-
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: ElevatedButton(
