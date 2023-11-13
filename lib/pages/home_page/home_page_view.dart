@@ -116,9 +116,8 @@ class _HomePageState extends State<HomePage> {
                                       (BuildContext context, int index) {
                                     return Container(
                                       child: Text(
-                                          'Source: ${state.virusTotalData[index].source} \nHarmless:${state.virusTotalData[index].harmless} '
-                                          '\nMalicious:${state.virusTotalData[index].malicious} \nSuspicious:${state.virusTotalData[index].suspicious}'
-                                          '\nUndetected:${state.virusTotalData[index].undetected}\nTimeout:${state.virusTotalData[index].timeout}\n'
+                                          'Source: ${state.virusTotalData[index].source} \nHarmless:${state.virusTotalData[index].harmless}\n'
+                                          'Total ${state.virusTotalData[index].harmless + state.virusTotalData[index].malicious + state.virusTotalData[index].suspicious + state.virusTotalData[index].timeout + state.virusTotalData[index].undetected}\n'
                                           'Date ${DateTime.fromMillisecondsSinceEpoch(state.virusTotalData[index].time * 1000)}\n'
                                           ''),
                                     );
