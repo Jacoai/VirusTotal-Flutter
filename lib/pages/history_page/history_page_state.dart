@@ -1,6 +1,14 @@
 part of 'history_page_bloc.dart';
 
-@immutable
-sealed class HistoryPageState {}
+final class HistoryPageState {
+  final List<VirusTotalData> virusTotalData;
 
-final class HistoryPageInitial extends HistoryPageState {}
+  HistoryPageState({
+    this.virusTotalData = const [],
+  });
+
+  HistoryPageState copyWith(List<VirusTotalData>? virusTotalData) {
+    return HistoryPageState(
+        virusTotalData: virusTotalData ?? this.virusTotalData);
+  }
+}

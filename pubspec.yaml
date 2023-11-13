@@ -24,6 +24,7 @@ dependencies:
     git:
       url: https://github.com/Jacoai/virus_total_cli.git
       ref: main
+  hive_flutter: ^1.1.0
 
 dev_dependencies:
   flutter_test:
