@@ -69,8 +69,8 @@ class _HomePageState extends State<HomePage> {
               ),
               TextButton(
                 onPressed: () {
-                  if (_bloc.state.isSending == true) {
-                    return;
+                  if (_bloc.state.isSending == true ||
+                      _bloc.state.pathsToScan.isEmpty) {
                   } else {
                     _bloc.add(SubmitOnCheck());
                   }
