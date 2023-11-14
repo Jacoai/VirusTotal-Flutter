@@ -43,8 +43,8 @@ class HistoryPageBloc extends Bloc<HistoryPageEvent, HistoryPageState> {
 
   Future<void> deleteRecord(
       DeleteRecord event, Emitter<HistoryPageState> emit) async {
-    //await _checkHistoryRepository.delete(event.path);
-    print('Emitted DeleteRecord event ');
+    await _checkHistoryRepository.delete(event.path);
+
     add(UpdateValues());
   }
 
