@@ -33,8 +33,4 @@ class VirusTotalCheckUsecase {
       rethrow;
     }
   }
-
-  void show() {
-    databaseRepository.printConsole();
-  }
 }
