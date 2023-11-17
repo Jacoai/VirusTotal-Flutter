@@ -51,8 +51,6 @@ class HistoryPageBloc extends Bloc<HistoryPageEvent, HistoryPageState> {
   Future<void> cleanHistory(
       CleanHistory event, Emitter<HistoryPageState> emit) async {
     await _checkHistoryRepository.clear();
-
-    print('Emitted DeleteAllHistory event ');
   }
 
   Future<void> fileDeleteAllHistory(
