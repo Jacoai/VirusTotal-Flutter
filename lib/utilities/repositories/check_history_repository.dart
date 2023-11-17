@@ -41,6 +41,10 @@ class CheckHistoryRepository {
     await _databaseClient.deletePath(path);
   }
 
+  Future<void> delete(String key) async {
+    await _databaseClient.delete(key);
+  }
+
   Future<void> clear() async {
     await _databaseClient.dataBase.clear();
   }
