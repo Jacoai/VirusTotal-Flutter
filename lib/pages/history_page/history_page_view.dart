@@ -42,7 +42,7 @@ class _HistoryPageState extends State<HistoryPage> {
                                 builder: (context) {
                                   return BlocEventAlerDialog(
                                     historyPageBloc: _historyBlock,
-                                    historyPageEvent: DeleteAllHistory(),
+                                    historyPageEvent: CleanHistory(),
                                     title: 'Deleting all history',
                                     content:
                                         'Are you sure, that you want to delete all history?',

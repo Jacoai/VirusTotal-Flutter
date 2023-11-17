@@ -12,7 +12,7 @@ class DeleteRecord extends HistoryPageEvent {
   DeleteRecord({required this.path});
 }
 
-class DeleteAllHistory extends HistoryPageEvent {}
+class CleanHistory extends HistoryPageEvent {}
 
 class FileDeleteAllHistory extends HistoryPageEvent {}
 

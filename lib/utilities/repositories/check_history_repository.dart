@@ -41,6 +41,10 @@ class CheckHistoryRepository {
     await _databaseClient.delete(key);
   }
 
+  Future<void> clear() async {
+    await _databaseClient.dataBase.clear();
+  }
+
   void printConsole() {
     _databaseClient.show();
   }
