@@ -53,8 +53,13 @@ class HistoryCard extends StatelessWidget {
                     builder: (context) {
                       return BlocEventAlerDialog(
                         historyPageBloc: historyPageBloc,
-                        historyPageEvent:
-                            RescanRecord(path: virusTotalData.source),
+                        historyPageEvent: RescanRecord(
+                          path: virusTotalData.source,
+                          isFile: virusTotalData.isFile,
+                          key: virusTotalData.isFile
+                              ? virusTotalData.md5!
+                              : virusTotalData.source,
+                        ),
                         title: 'Rescan the record',
                         content:
                             'Are you sure, that you want to rescan the record with sourсe: ${virusTotalData.source}',

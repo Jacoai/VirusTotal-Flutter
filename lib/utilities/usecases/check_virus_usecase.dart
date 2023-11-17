@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:injectable/injectable.dart';
 import 'package:ui_clen_api_vt/utilities/repositories/check_virus_repository.dart';
 import 'package:ui_clen_api_vt/utilities/repositories/check_history_repository.dart';
@@ -14,7 +16,7 @@ class VirusTotalCheckUsecase {
   final ReportCheckRepository _reportCheckRepository;
   final CheckHistoryRepository databaseRepository;
 
-  Future<VirusTotalData> check(String path) async {
+  Future<VirusTotalData> scan(String path) async {
     try {
       bool isFile1 = isFile(path);
       VirusTotalData data;
@@ -29,6 +31,25 @@ class VirusTotalCheckUsecase {
         await databaseRepository.put(path, analysisData);
       }
       return data;
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<void> rescan({
+    required String path,
+    required bool isFile,
+    required String key,
+  }) async {
+    try {
+      if (isFile && !File(path).existsSync()) {
+        return;
+      }
+
+      AnalysisData analysisData =
+          await _reportCheckRepository.getAnalisisReport(path, isFile);
+      await databaseRepository.delete(key);
+      await databaseRepository.put(path, analysisData);
     } catch (e) {
       rethrow;
     }

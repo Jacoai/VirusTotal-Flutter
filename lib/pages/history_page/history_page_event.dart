@@ -20,5 +20,11 @@ class LinkDeleteAllHistory extends HistoryPageEvent {}
 
 class RescanRecord extends HistoryPageEvent {
   final String path;
-  RescanRecord({required this.path});
+  final bool isFile;
+  final String key;
+  RescanRecord({
+    required this.path,
+    required this.isFile,
+    required this.key,
+  });
 }

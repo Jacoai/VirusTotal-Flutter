@@ -57,16 +57,21 @@ class HistoryPageBloc extends Bloc<HistoryPageEvent, HistoryPageState> {
 
   Future<void> fileDeleteAllHistory(
       FileDeleteAllHistory event, Emitter<HistoryPageState> emit) async {
-    _virusTotalCheckUsecase.databaseRepository.fileDeleteAllHistory();
+    await _virusTotalCheckUsecase.databaseRepository.fileDeleteAllHistory();
   }
 
   Future<void> linkDeleteAllHistory(
       LinkDeleteAllHistory event, Emitter<HistoryPageState> emit) async {
-    _virusTotalCheckUsecase.databaseRepository.linkDeleteAllHistory();
+    await _virusTotalCheckUsecase.databaseRepository.linkDeleteAllHistory();
   }
 
   Future<void> rescanRecord(
       RescanRecord event, Emitter<HistoryPageState> emit) async {
-    print('Emitted RecheckRecord event ');
+    await _virusTotalCheckUsecase.rescan(
+      path: event.path,
+      isFile: event.isFile,
+      key: event.key,
+    );
+    add(UpdateValues());
   }
 }
