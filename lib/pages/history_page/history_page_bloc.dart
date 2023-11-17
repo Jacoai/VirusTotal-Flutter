@@ -2,6 +2,7 @@ import 'package:bloc/bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:meta/meta.dart';
 import 'package:ui_clen_api_vt/utilities/repositories/check_history_repository.dart';
+import 'package:ui_clen_api_vt/utilities/usecases/check_virus_usecase.dart';
 import 'package:virus_total_cli/virus_total_cli.dart';
 
 part 'history_page_event.dart';
@@ -17,14 +18,15 @@ class HistoryPageBloc extends Bloc<HistoryPageEvent, HistoryPageState> {
     on<LinkDeleteAllHistory>(linkDeleteAllHistory);
     on<RescanRecord>(rescanRecord);
   }
-  late final CheckHistoryRepository _checkHistoryRepository;
+  late final VirusTotalCheckUsecase _virusTotalCheckUsecase;
 
   Future<void> historyPageOpened(
       HistoryPageOpened event, Emitter<HistoryPageState> emit) async {
-    _checkHistoryRepository = GetIt.I.get<CheckHistoryRepository>();
+    _virusTotalCheckUsecase = GetIt.I.get<VirusTotalCheckUsecase>();
 
-    var valueListenableCheckHistory =
-        await _checkHistoryRepository.getCheckHistoryValueListenable();
+    var valueListenableCheckHistory = await _virusTotalCheckUsecase
+        .databaseRepository
+        .getCheckHistoryValueListenable();
 
     valueListenableCheckHistory.addListener(() {
       add(UpdateValues());
@@ -36,31 +38,31 @@ class HistoryPageBloc extends Bloc<HistoryPageEvent, HistoryPageState> {
   Future<void> updateValues(
       UpdateValues event, Emitter<HistoryPageState> emit) async {
     List<VirusTotalData> virusTotalData;
-    virusTotalData = _checkHistoryRepository.getAll();
+    virusTotalData = _virusTotalCheckUsecase.databaseRepository.getAll();
 
     emit(state.copyWith(virusTotalData));
   }
 
   Future<void> deleteRecord(
       DeleteRecord event, Emitter<HistoryPageState> emit) async {
-    await _checkHistoryRepository.deletePath(event.path);
+    await _virusTotalCheckUsecase.databaseRepository.deletePath(event.path);
 
     add(UpdateValues());
   }
 
   Future<void> cleanHistory(
       CleanHistory event, Emitter<HistoryPageState> emit) async {
-    await _checkHistoryRepository.clear();
+    await _virusTotalCheckUsecase.databaseRepository.clear();
   }
 
   Future<void> fileDeleteAllHistory(
       FileDeleteAllHistory event, Emitter<HistoryPageState> emit) async {
-    _checkHistoryRepository.fileDeleteAllHistory();
+    _virusTotalCheckUsecase.databaseRepository.fileDeleteAllHistory();
   }
 
   Future<void> linkDeleteAllHistory(
       LinkDeleteAllHistory event, Emitter<HistoryPageState> emit) async {
-    _checkHistoryRepository.linkDeleteAllHistory();
+    _virusTotalCheckUsecase.databaseRepository.linkDeleteAllHistory();
   }
 
   Future<void> rescanRecord(
