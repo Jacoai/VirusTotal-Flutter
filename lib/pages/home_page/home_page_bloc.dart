@@ -1,7 +1,10 @@
+import 'dart:io';
+
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:meta/meta.dart';
+import 'package:ui_clen_api_vt/utilities/functions/is_file_.dart';
 import 'package:ui_clen_api_vt/utilities/usecases/check_virus_usecase.dart';
 import 'package:virus_total_cli/virus_total_cli.dart';
 
@@ -26,7 +29,11 @@ class HomePageBloc extends Bloc<HomePageEvent, HomePageState> {
     AddToCheckQueue event,
     Emitter<HomePageState> emit,
   ) async {
-    emit(state.copyWith(path: event.path, isSending: state.isSending));
+    if (isFile(event.path) && !File(event.path).existsSync()) {
+      emit(state.copyWith(isSending: state.isSending));
+    } else {
+      emit(state.copyWith(path: event.path, isSending: state.isSending));
+    }
   }
 
   Future<void> submitOnCheck(
