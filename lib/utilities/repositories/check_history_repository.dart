@@ -37,15 +37,31 @@ class CheckHistoryRepository {
     return await _databaseClient.containsKey(key);
   }
 
-  Future<void> delete(String key) async {
-    await _databaseClient.delete(key);
+  Future<void> deletePath(String path) async {
+    await _databaseClient.deletePath(path);
   }
 
   Future<void> clear() async {
     await _databaseClient.dataBase.clear();
   }
 
-  void printConsole() {
-    _databaseClient.show();
+  Future<void> fileDeleteAllHistory() async {
+    List<VirusTotalData> values = List.from(_databaseClient.dataBase.values);
+
+    for (int i = 0; i < values.length; i++) {
+      if (values[i].isFile) {
+        _databaseClient.delete(values[i].md5!);
+      }
+    }
+  }
+
+  Future<void> linkDeleteAllHistory() async {
+    List<VirusTotalData> values = List.from(_databaseClient.dataBase.values);
+
+    for (int i = 0; i < values.length; i++) {
+      if (!values[i].isFile) {
+        _databaseClient.delete(values[i].source);
+      }
+    }
   }
 }
