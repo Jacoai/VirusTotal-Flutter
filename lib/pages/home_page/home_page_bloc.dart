@@ -46,7 +46,7 @@ class HomePageBloc extends Bloc<HomePageEvent, HomePageState> {
 
     for (int i = 0; i < pathCount; i++) {
       try {
-        data = await _virusTotalCheckUsecase.check(state.pathsToScan[0]);
+        data = await _virusTotalCheckUsecase.scan(state.pathsToScan[0]);
 
         emit(state.copyWith(isSending: true, data: data));
       } catch (e, st) {
