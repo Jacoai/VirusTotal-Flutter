@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ui_clen_api_vt/components/color_palettes/color_palette.dart';
 import 'package:ui_clen_api_vt/pages/history_page/history_page_bloc.dart';
 
 class BlocEventAlerDialog extends StatelessWidget {
@@ -17,22 +18,58 @@ class BlocEventAlerDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: Text(title),
-      content: Text(content),
+      backgroundColor: ultraViolet,
+      title: Align(
+        alignment: Alignment.center,
+        child: Text(
+          title,
+          style: const TextStyle(color: mintGreen),
+        ),
+      ),
+      content: Text(
+        content,
+        style: const TextStyle(color: mintGreen),
+      ),
       actions: [
-        TextButton(
+        ElevatedButton(
           onPressed: () {
             historyPageBloc.add(historyPageEvent);
             Navigator.of(context).pop();
           },
-          child: const Text('Yes'),
+          style: ElevatedButton.styleFrom(
+            backgroundColor: ultraViolet,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(5),
+              side: const BorderSide(
+                color: malachite,
+              ),
+            ),
+          ),
+          child: const Text(
+            'Yes',
+            style: TextStyle(
+              color: malachite,
+            ),
+          ),
         ),
-        TextButton(
+        ElevatedButton(
           onPressed: () {
             Navigator.of(context).pop();
           },
-          child: const Text('No'),
-        )
+          style: ElevatedButton.styleFrom(
+            backgroundColor: ultraViolet,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(5),
+              side: const BorderSide(
+                color: bringPink,
+              ),
+            ),
+          ),
+          child: const Text(
+            'No',
+            style: TextStyle(color: bringPink),
+          ),
+        ),
       ],
     );
   }

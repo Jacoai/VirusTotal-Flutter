@@ -1,5 +1,6 @@
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:ui_clen_api_vt/components/color_palettes/color_palette.dart';
 
 import 'package:ui_clen_api_vt/pages/home_page/home_page_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -19,9 +20,12 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Vuris Total checker'),
+        title: const Text(
+          'Vuris Total checker',
+          style: TextStyle(color: mintGreen, fontWeight: FontWeight.w700),
+        ),
         centerTitle: true,
-        backgroundColor: Colors.green[300],
+        backgroundColor: ultraViolet,
       ),
       body: BlocProvider<HomePageBloc>(
         create: (context) => _bloc
@@ -29,7 +33,7 @@ class _HomePageState extends State<HomePage> {
             HomePageOpened(),
           ),
         child: Container(
-          color: Colors.green[200],
+          color: trueBlue,
           alignment: Alignment.center,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -37,13 +41,38 @@ class _HomePageState extends State<HomePage> {
               Padding(
                 padding: const EdgeInsets.fromLTRB(15, 30, 10, 0),
                 child: TextField(
+                  style: const TextStyle(color: mintGreen),
                   controller: fieldText,
                   expands: false,
                   decoration: const InputDecoration(
-                    border: OutlineInputBorder(),
-                    icon: Icon(Icons.login),
-                    hintText: 'Введте ссылку',
-                    helperText: 'Ссылку, которую нужно проверить',
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(30),
+                      ),
+                    ),
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(30),
+                      ),
+                      borderSide: BorderSide(
+                        color: ultraViolet,
+                        width: 5,
+                      ),
+                    ),
+                    icon: Icon(Icons.input),
+                    hintText: 'Input link',
+                    helperText: 'Press Enter to add the link to queue',
+                    helperStyle: TextStyle(
+                      color: mintGreen,
+                      fontWeight: FontWeight.w300,
+                    ),
+                    hintStyle: TextStyle(
+                      color: mintGreen,
+                      fontSize: 13,
+                      fontWeight: FontWeight.w300,
+                      letterSpacing: 1,
+                    ),
+                    iconColor: mintGreen,
                   ),
                   onSubmitted: (text) => {
                     _bloc.add(
@@ -53,19 +82,38 @@ class _HomePageState extends State<HomePage> {
                   },
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: ElevatedButton(
-                  onPressed: () async {
-                    final result = await FilePicker.platform.pickFiles();
-                    if (result == null) {
-                      return;
-                    }
-                    final file = result.files.first;
-                    _bloc.add(AddToCheckQueue(path: file.path!));
-                  },
-                  child: const Icon(Icons.file_open_outlined),
-                ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: Text(
+                      'Pick file',
+                      style: TextStyle(
+                        color: mintGreen,
+                        fontSize: 14,
+                        letterSpacing: 1,
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: ElevatedButton(
+                      onPressed: () async {
+                        final result = await FilePicker.platform.pickFiles();
+                        if (result == null) {
+                          return;
+                        }
+                        final file = result.files.first;
+                        _bloc.add(AddToCheckQueue(path: file.path!));
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: mintGreen,
+                      ),
+                      child: const Icon(Icons.file_open_outlined),
+                    ),
+                  ),
+                ],
               ),
               TextButton(
                 onPressed: () {
@@ -77,13 +125,13 @@ class _HomePageState extends State<HomePage> {
                 },
                 style: const ButtonStyle(
                   backgroundColor: MaterialStatePropertyAll(
-                    Color.fromARGB(255, 226, 125, 95),
+                    ultraViolet,
                   ),
                 ),
                 child: const Text(
                   "Отправить на проверку",
                   style: TextStyle(
-                    color: Color.fromRGBO(255, 255, 255, 1),
+                    color: mintGreen,
                     fontSize: 16,
                   ),
                 ),
@@ -104,18 +152,46 @@ class _HomePageState extends State<HomePage> {
                                   itemBuilder:
                                       (BuildContext context, int index) {
                                     return Container(
+                                      margin: const EdgeInsets.all(2),
                                       decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(5),
+                                        borderRadius: BorderRadius.circular(30),
                                         border: Border.all(
-                                          color: const Color.fromARGB(
-                                              255, 255, 165, 0),
+                                          color: ultraViolet,
                                           width: 4,
                                         ),
                                       ),
                                       padding: const EdgeInsets.all(3.0),
-                                      child: Text(
-                                        state.pathsToScan[index],
-                                        style: const TextStyle(fontSize: 14),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Padding(
+                                            padding: const EdgeInsets.fromLTRB(
+                                                15, 3, 3, 3),
+                                            child: Text(
+                                              state.pathsToScan[index],
+                                              style: const TextStyle(
+                                                fontSize: 16,
+                                                color: mintGreen,
+                                              ),
+                                            ),
+                                          ),
+                                          state.isSending
+                                              ? Container(
+                                                  height: 25,
+                                                  width: 25,
+                                                  margin:
+                                                      const EdgeInsets.fromLTRB(
+                                                          25, 5, 5, 5),
+                                                  child:
+                                                      const CircularProgressIndicator(
+                                                    color: mintGreen,
+                                                    backgroundColor:
+                                                        ultraViolet,
+                                                  ),
+                                                )
+                                              : Container(),
+                                        ],
                                       ),
                                     );
                                   },
@@ -124,7 +200,7 @@ class _HomePageState extends State<HomePage> {
                             : Container(),
                         state.virusTotalData.isNotEmpty
                             ? Expanded(
-                                flex: 3,
+                                flex: 2,
                                 child: ListView.builder(
                                   scrollDirection: Axis.vertical,
                                   shrinkWrap: true,

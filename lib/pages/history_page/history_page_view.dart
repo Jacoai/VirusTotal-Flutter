@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ui_clen_api_vt/components/bloc_event_alert_dialog.dart';
+import 'package:ui_clen_api_vt/components/color_palettes/color_palette.dart';
 import 'package:ui_clen_api_vt/components/history_card.dart';
 import 'package:ui_clen_api_vt/pages/history_page/history_page_bloc.dart';
 
@@ -18,16 +19,19 @@ class _HistoryPageState extends State<HistoryPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Vuris Total checker'),
+        title: const Text(
+          'Vuris Total checker',
+          style: TextStyle(color: mintGreen, fontWeight: FontWeight.w700),
+        ),
         centerTitle: true,
-        backgroundColor: Colors.green[300],
+        backgroundColor: ultraViolet,
       ),
       body: BlocProvider<HistoryPageBloc>(
           create: (context) => _historyBlock..add(HistoryPageOpened()),
           child: BlocBuilder<HistoryPageBloc, HistoryPageState>(
             builder: (context, state) {
               return Container(
-                color: Colors.green[200],
+                color: trueBlue,
                 child: Column(
                   children: [
                     Padding(
@@ -43,14 +47,24 @@ class _HistoryPageState extends State<HistoryPage> {
                                   return BlocEventAlerDialog(
                                     historyPageBloc: _historyBlock,
                                     historyPageEvent: CleanHistory(),
-                                    title: 'Deleting all history',
+                                    title: 'Clean history',
                                     content:
-                                        'Are you sure, that you want to delete all history?',
+                                        'Are you sure, that you want to clean history?',
                                   );
                                 },
                               );
                             },
-                            child: const Text('delete all history'),
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: mintGreen,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(5),
+                                side: const BorderSide(color: bringPink),
+                              ),
+                            ),
+                            child: const Text(
+                              'Clean history',
+                              style: TextStyle(color: bringPink, fontSize: 15),
+                            ),
                           ),
                           ElevatedButton(
                             onPressed: () {
@@ -67,8 +81,19 @@ class _HistoryPageState extends State<HistoryPage> {
                                 },
                               );
                             },
-                            child:
-                                const Text('Delete all file history of links'),
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: mintGreen,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(5),
+                                side: const BorderSide(
+                                  color: bringPink,
+                                ),
+                              ),
+                            ),
+                            child: const Text(
+                              'Delete all file history of links',
+                              style: TextStyle(color: bringPink, fontSize: 15),
+                            ),
                           ),
                           ElevatedButton(
                             onPressed: () {
@@ -80,12 +105,25 @@ class _HistoryPageState extends State<HistoryPage> {
                                     historyPageEvent: LinkDeleteAllHistory(),
                                     title: 'Deleting all history',
                                     content:
-                                        'Are you sure, that you want to delete all history of links \?',
+                                        'Are you sure, that you want to delete all history of links ?',
                                   );
                                 },
                               );
                             },
-                            child: const Text('Delete all link history'),
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: mintGreen,
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(5),
+                                side: const BorderSide(color: bringPink),
+                              ),
+                            ),
+                            child: const Text(
+                              'Delete all link history',
+                              style: TextStyle(
+                                color: bringPink,
+                                fontSize: 15,
+                              ),
+                            ),
                           ),
                         ],
                       ),
@@ -94,9 +132,17 @@ class _HistoryPageState extends State<HistoryPage> {
                       child: ListView.builder(
                         itemCount: state.virusTotalData.length,
                         itemBuilder: (BuildContext context, int index) {
-                          return HistoryCard(
-                            virusTotalData: state.virusTotalData[index],
-                            historyPageBloc: _historyBlock,
+                          return Container(
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: ultraViolet,
+                                width: 5,
+                              ),
+                            ),
+                            child: HistoryCard(
+                              virusTotalData: state.virusTotalData[index],
+                              historyPageBloc: _historyBlock,
+                            ),
                           );
                         },
                       ),

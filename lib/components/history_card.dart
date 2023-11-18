@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ui_clen_api_vt/components/bloc_event_alert_dialog.dart';
+import 'package:ui_clen_api_vt/components/color_palettes/color_palette.dart';
 import 'package:ui_clen_api_vt/pages/history_page/history_page_bloc.dart';
 import 'package:virus_total_cli/virus_total_cli.dart';
 
@@ -13,15 +14,40 @@ class HistoryCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ExpansionTile(
-      title: Text(virusTotalData.source),
+      backgroundColor: ultraViolet,
+      title: Text(
+        virusTotalData.source,
+        style: TextStyle(
+          color: (virusTotalData.malicious > 0) ? bringPink : malachite,
+          fontSize: 17,
+        ),
+      ),
       subtitle: Text(
         '${DateTime.fromMillisecondsSinceEpoch(virusTotalData.time * 1000)}',
+        style: const TextStyle(
+          color: mintGreen,
+        ),
       ),
       children: [
-        ListTile(
-          title: Text('Harmless:${virusTotalData.harmless} '
-              '\nMalicious:${virusTotalData.malicious} \nSuspicious:${virusTotalData.suspicious}'
-              '\nUndetected:${virusTotalData.undetected}\nTimeout:${virusTotalData.timeout}\n'),
+        Row(
+          children: [
+            Expanded(
+              child: ListTile(
+                title: Text('Harmless:${virusTotalData.harmless}'
+                    '\nUndetected:${virusTotalData.undetected}\n'
+                    'Timeout:${virusTotalData.timeout}'),
+                textColor: malachite,
+              ),
+            ),
+            Expanded(
+              flex: 5,
+              child: ListTile(
+                title: Text('Malicious:${virusTotalData.malicious}\n'
+                    'Suspicious:${virusTotalData.suspicious}\n'),
+                textColor: bringPink,
+              ),
+            ),
+          ],
         ),
         Padding(
           padding: const EdgeInsets.all(8.0),
@@ -44,7 +70,7 @@ class HistoryCard extends StatelessWidget {
                     },
                   );
                 },
-                child: const Icon(Icons.delete_rounded),
+                child: const Icon(Icons.delete_rounded, color: bringPink),
               ),
               ElevatedButton(
                 onPressed: () {
