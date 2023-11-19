@@ -91,7 +91,7 @@ class _HistoryPageState extends State<HistoryPage> {
                               ),
                             ),
                             child: const Text(
-                              'Delete all file history of links',
+                              'Delete all file history ',
                               style: TextStyle(color: bringPink, fontSize: 15),
                             ),
                           ),
