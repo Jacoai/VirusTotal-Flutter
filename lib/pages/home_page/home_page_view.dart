@@ -143,25 +143,22 @@ class _HomePageState extends State<HomePage> {
                       children: [
                         //Queque
                         state.pathsToScan.isNotEmpty
-                            ? Expanded(
-                                child: ListView.builder(
-                                  scrollDirection: Axis.vertical,
-                                  shrinkWrap: true,
-                                  itemCount: state.pathsToScan.length,
-                                  padding: const EdgeInsets.all(10),
-                                  itemBuilder:
-                                      (BuildContext context, int index) {
-                                    return Container(
-                                      margin: const EdgeInsets.all(2),
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(30),
-                                        border: Border.all(
-                                          color: ultraViolet,
-                                          width: 4,
-                                        ),
-                                      ),
-                                      padding: const EdgeInsets.all(3.0),
-                                      child: Row(
+                            ? Container(
+                                margin: const EdgeInsets.all(8.0),
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(30),
+                                  border:
+                                      Border.all(color: ultraViolet, width: 5),
+                                ),
+                                child: Expanded(
+                                  child: ListView.builder(
+                                    scrollDirection: Axis.vertical,
+                                    shrinkWrap: true,
+                                    itemCount: state.pathsToScan.length,
+                                    padding: const EdgeInsets.all(10),
+                                    itemBuilder:
+                                        (BuildContext context, int index) {
+                                      return Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
                                         children: [
@@ -192,31 +189,78 @@ class _HomePageState extends State<HomePage> {
                                                 )
                                               : Container(),
                                         ],
-                                      ),
-                                    );
-                                  },
+                                      );
+                                    },
+                                  ),
                                 ),
                               )
                             : Container(),
+                        //Scan result
                         state.virusTotalData.isNotEmpty
                             ? Expanded(
                                 flex: 2,
-                                child: ListView.builder(
-                                  scrollDirection: Axis.vertical,
-                                  shrinkWrap: true,
-                                  itemCount: state.virusTotalData.length,
-                                  padding: const EdgeInsets.all(10),
-                                  itemBuilder:
-                                      (BuildContext context, int index) {
-                                    return Container(
-                                      //TODO: add undetached for file
-                                      child: Text(
-                                          'Source: ${state.virusTotalData[index].source} \nHarmless:${state.virusTotalData[index].harmless}\n'
-                                          'Total ${state.virusTotalData[index].harmless + state.virusTotalData[index].malicious + state.virusTotalData[index].suspicious + state.virusTotalData[index].timeout + state.virusTotalData[index].undetected}\n'
-                                          'Date ${DateTime.fromMillisecondsSinceEpoch(state.virusTotalData[index].time * 1000)}\n'
-                                          ''),
-                                    );
-                                  },
+                                child: Container(
+                                  margin: const EdgeInsets.all(8.0),
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(30),
+                                    border: Border.all(
+                                      color: amethyst,
+                                      width: 5,
+                                    ),
+                                  ),
+                                  child: ListView.builder(
+                                    scrollDirection: Axis.vertical,
+                                    shrinkWrap: true,
+                                    itemCount: state.virusTotalData.length,
+                                    padding: const EdgeInsets.all(10),
+                                    itemBuilder:
+                                        (BuildContext context, int index) {
+                                      return Container(
+                                        margin: const EdgeInsets.all(5),
+                                        decoration: BoxDecoration(
+                                          border: Border.all(
+                                            color: amethyst,
+                                            width: 5,
+                                          ),
+                                          borderRadius: const BorderRadius.all(
+                                            Radius.circular(30),
+                                          ),
+                                        ),
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(10.0),
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(
+                                                'Source: ${state.virusTotalData[index].source}\n'
+                                                'Total ${state.virusTotalData[index].harmless + state.virusTotalData[index].malicious + state.virusTotalData[index].suspicious + state.virusTotalData[index].timeout + state.virusTotalData[index].undetected}',
+                                                style: const TextStyle(
+                                                  color: mintGreen,
+                                                  fontSize: 15,
+                                                ),
+                                              ),
+                                              state.virusTotalData[index].isFile
+                                                  ? Text(
+                                                      'Undetached:${state.virusTotalData[index].undetected}',
+                                                      style: const TextStyle(
+                                                        color: malachite,
+                                                        fontSize: 15,
+                                                      ),
+                                                    )
+                                                  : Text(
+                                                      'Harmless:${state.virusTotalData[index].harmless}',
+                                                      style: const TextStyle(
+                                                        color: malachite,
+                                                        fontSize: 15,
+                                                      ),
+                                                    )
+                                            ],
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                  ),
                                 ),
                               )
                             : Container(),
