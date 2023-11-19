@@ -1,6 +1,6 @@
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:ui_clen_api_vt/components/color_palettes/color_palette.dart';
+import 'package:ui_clen_api_vt/components/color_palettes/vt_color_palette.dart';
 
 import 'package:ui_clen_api_vt/pages/home_page/home_page_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

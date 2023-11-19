@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ui_clen_api_vt/components/bloc_event_alert_dialog.dart';
-import 'package:ui_clen_api_vt/components/color_palettes/color_palette.dart';
+import 'package:ui_clen_api_vt/components/color_palettes/vt_color_palette.dart';
 import 'package:ui_clen_api_vt/pages/history_page/history_page_bloc.dart';
 import 'package:virus_total_cli/virus_total_cli.dart';
 
