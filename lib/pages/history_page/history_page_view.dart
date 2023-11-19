@@ -19,19 +19,20 @@ class _HistoryPageState extends State<HistoryPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
+        title: Text(
           'Vuris Total checker',
-          style: TextStyle(color: mintGreen, fontWeight: FontWeight.w700),
+          style: TextStyle(
+              color: VtColorPalette.mintGreen, fontWeight: FontWeight.w700),
         ),
         centerTitle: true,
-        backgroundColor: ultraViolet,
+        backgroundColor: VtColorPalette.ultraViolet,
       ),
       body: BlocProvider<HistoryPageBloc>(
           create: (context) => _historyBlock..add(HistoryPageOpened()),
           child: BlocBuilder<HistoryPageBloc, HistoryPageState>(
             builder: (context, state) {
               return Container(
-                color: trueBlue,
+                color: VtColorPalette.trueBlue,
                 child: Column(
                   children: [
                     Padding(
@@ -55,15 +56,18 @@ class _HistoryPageState extends State<HistoryPage> {
                               );
                             },
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: mintGreen,
+                              backgroundColor: VtColorPalette.mintGreen,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(5),
-                                side: const BorderSide(color: bringPink),
+                                side:
+                                    BorderSide(color: VtColorPalette.bringPink),
                               ),
                             ),
-                            child: const Text(
+                            child: Text(
                               'Clean history',
-                              style: TextStyle(color: bringPink, fontSize: 15),
+                              style: TextStyle(
+                                  color: VtColorPalette.bringPink,
+                                  fontSize: 15),
                             ),
                           ),
                           ElevatedButton(
@@ -82,17 +86,19 @@ class _HistoryPageState extends State<HistoryPage> {
                               );
                             },
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: mintGreen,
+                              backgroundColor: VtColorPalette.mintGreen,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(5),
-                                side: const BorderSide(
-                                  color: bringPink,
+                                side: BorderSide(
+                                  color: VtColorPalette.bringPink,
                                 ),
                               ),
                             ),
-                            child: const Text(
+                            child: Text(
                               'Delete all file history ',
-                              style: TextStyle(color: bringPink, fontSize: 15),
+                              style: TextStyle(
+                                  color: VtColorPalette.bringPink,
+                                  fontSize: 15),
                             ),
                           ),
                           ElevatedButton(
@@ -111,16 +117,17 @@ class _HistoryPageState extends State<HistoryPage> {
                               );
                             },
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: mintGreen,
+                              backgroundColor: VtColorPalette.mintGreen,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(5),
-                                side: const BorderSide(color: bringPink),
+                                side:
+                                    BorderSide(color: VtColorPalette.bringPink),
                               ),
                             ),
-                            child: const Text(
+                            child: Text(
                               'Delete all link history',
                               style: TextStyle(
-                                color: bringPink,
+                                color: VtColorPalette.bringPink,
                                 fontSize: 15,
                               ),
                             ),
@@ -135,7 +142,7 @@ class _HistoryPageState extends State<HistoryPage> {
                           return Container(
                             decoration: BoxDecoration(
                               border: Border.all(
-                                color: ultraViolet,
+                                color: VtColorPalette.ultraViolet,
                                 width: 5,
                               ),
                             ),

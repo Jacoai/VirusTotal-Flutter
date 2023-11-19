@@ -18,17 +18,17 @@ class BlocEventAlerDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      backgroundColor: ultraViolet,
+      backgroundColor: VtColorPalette.ultraViolet,
       title: Align(
         alignment: Alignment.center,
         child: Text(
           title,
-          style: const TextStyle(color: mintGreen),
+          style: TextStyle(color: VtColorPalette.mintGreen),
         ),
       ),
       content: Text(
         content,
-        style: const TextStyle(color: mintGreen),
+        style: TextStyle(color: VtColorPalette.mintGreen),
       ),
       actions: [
         ElevatedButton(
@@ -37,18 +37,18 @@ class BlocEventAlerDialog extends StatelessWidget {
             Navigator.of(context).pop();
           },
           style: ElevatedButton.styleFrom(
-            backgroundColor: ultraViolet,
+            backgroundColor: VtColorPalette.ultraViolet,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(5),
-              side: const BorderSide(
-                color: malachite,
+              side: BorderSide(
+                color: VtColorPalette.malachite,
               ),
             ),
           ),
-          child: const Text(
+          child: Text(
             'Yes',
             style: TextStyle(
-              color: malachite,
+              color: VtColorPalette.malachite,
             ),
           ),
         ),
@@ -57,17 +57,17 @@ class BlocEventAlerDialog extends StatelessWidget {
             Navigator.of(context).pop();
           },
           style: ElevatedButton.styleFrom(
-            backgroundColor: ultraViolet,
+            backgroundColor: VtColorPalette.ultraViolet,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(5),
-              side: const BorderSide(
-                color: bringPink,
+              side: BorderSide(
+                color: VtColorPalette.bringPink,
               ),
             ),
           ),
-          child: const Text(
+          child: Text(
             'No',
-            style: TextStyle(color: bringPink),
+            style: TextStyle(color: VtColorPalette.bringPink),
           ),
         ),
       ],

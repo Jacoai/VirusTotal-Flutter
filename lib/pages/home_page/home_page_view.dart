@@ -20,12 +20,15 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
+        title: Text(
           'Vuris Total checker',
-          style: TextStyle(color: mintGreen, fontWeight: FontWeight.w700),
+          style: TextStyle(
+            color: VtColorPalette.mintGreen,
+            fontWeight: FontWeight.w700,
+          ),
         ),
         centerTitle: true,
-        backgroundColor: ultraViolet,
+        backgroundColor: VtColorPalette.ultraViolet,
       ),
       body: BlocProvider<HomePageBloc>(
         create: (context) => _bloc
@@ -33,7 +36,7 @@ class _HomePageState extends State<HomePage> {
             HomePageOpened(),
           ),
         child: Container(
-          color: trueBlue,
+          color: VtColorPalette.trueBlue,
           alignment: Alignment.center,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -41,38 +44,38 @@ class _HomePageState extends State<HomePage> {
               Padding(
                 padding: const EdgeInsets.fromLTRB(15, 30, 10, 0),
                 child: TextField(
-                  style: const TextStyle(color: mintGreen),
+                  style: TextStyle(color: VtColorPalette.mintGreen),
                   controller: fieldText,
                   expands: false,
-                  decoration: const InputDecoration(
-                    border: OutlineInputBorder(
+                  decoration: InputDecoration(
+                    border: const OutlineInputBorder(
                       borderRadius: BorderRadius.all(
                         Radius.circular(30),
                       ),
                     ),
                     enabledBorder: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(
+                      borderRadius: const BorderRadius.all(
                         Radius.circular(30),
                       ),
                       borderSide: BorderSide(
-                        color: ultraViolet,
+                        color: VtColorPalette.ultraViolet,
                         width: 5,
                       ),
                     ),
-                    icon: Icon(Icons.input),
+                    icon: const Icon(Icons.input),
                     hintText: 'Input link',
                     helperText: 'Press Enter to add the link to queue',
                     helperStyle: TextStyle(
-                      color: mintGreen,
+                      color: VtColorPalette.mintGreen,
                       fontWeight: FontWeight.w300,
                     ),
                     hintStyle: TextStyle(
-                      color: mintGreen,
+                      color: VtColorPalette.mintGreen,
                       fontSize: 13,
                       fontWeight: FontWeight.w300,
                       letterSpacing: 1,
                     ),
-                    iconColor: mintGreen,
+                    iconColor: VtColorPalette.mintGreen,
                   ),
                   onSubmitted: (text) => {
                     _bloc.add(
@@ -85,12 +88,12 @@ class _HomePageState extends State<HomePage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Padding(
-                    padding: EdgeInsets.all(8.0),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
                     child: Text(
                       'Pick file',
                       style: TextStyle(
-                        color: mintGreen,
+                        color: VtColorPalette.mintGreen,
                         fontSize: 14,
                         letterSpacing: 1,
                       ),
@@ -108,7 +111,7 @@ class _HomePageState extends State<HomePage> {
                         _bloc.add(AddToCheckQueue(path: file.path!));
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: mintGreen,
+                        backgroundColor: VtColorPalette.mintGreen,
                       ),
                       child: const Icon(Icons.file_open_outlined),
                     ),
@@ -123,15 +126,15 @@ class _HomePageState extends State<HomePage> {
                     _bloc.add(SubmitOnCheck());
                   }
                 },
-                style: const ButtonStyle(
+                style: ButtonStyle(
                   backgroundColor: MaterialStatePropertyAll(
-                    ultraViolet,
+                    VtColorPalette.ultraViolet,
                   ),
                 ),
-                child: const Text(
+                child: Text(
                   "Отправить на проверку",
                   style: TextStyle(
-                    color: mintGreen,
+                    color: VtColorPalette.mintGreen,
                     fontSize: 16,
                   ),
                 ),
@@ -147,8 +150,9 @@ class _HomePageState extends State<HomePage> {
                                 margin: const EdgeInsets.all(8.0),
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(30),
-                                  border:
-                                      Border.all(color: ultraViolet, width: 5),
+                                  border: Border.all(
+                                      color: VtColorPalette.ultraViolet,
+                                      width: 5),
                                 ),
                                 child: Expanded(
                                   child: ListView.builder(
@@ -167,9 +171,9 @@ class _HomePageState extends State<HomePage> {
                                                 15, 3, 3, 3),
                                             child: Text(
                                               state.pathsToScan[index],
-                                              style: const TextStyle(
+                                              style: TextStyle(
                                                 fontSize: 16,
-                                                color: mintGreen,
+                                                color: VtColorPalette.mintGreen,
                                               ),
                                             ),
                                           ),
@@ -181,10 +185,12 @@ class _HomePageState extends State<HomePage> {
                                                       const EdgeInsets.fromLTRB(
                                                           25, 5, 5, 5),
                                                   child:
-                                                      const CircularProgressIndicator(
-                                                    color: mintGreen,
+                                                      CircularProgressIndicator(
+                                                    color: VtColorPalette
+                                                        .mintGreen,
                                                     backgroundColor:
-                                                        ultraViolet,
+                                                        VtColorPalette
+                                                            .ultraViolet,
                                                   ),
                                                 )
                                               : Container(),
@@ -204,7 +210,7 @@ class _HomePageState extends State<HomePage> {
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(30),
                                     border: Border.all(
-                                      color: amethyst,
+                                      color: VtColorPalette.amethyst,
                                       width: 5,
                                     ),
                                   ),
@@ -219,7 +225,7 @@ class _HomePageState extends State<HomePage> {
                                         margin: const EdgeInsets.all(5),
                                         decoration: BoxDecoration(
                                           border: Border.all(
-                                            color: amethyst,
+                                            color: VtColorPalette.amethyst,
                                             width: 5,
                                           ),
                                           borderRadius: const BorderRadius.all(
@@ -235,23 +241,26 @@ class _HomePageState extends State<HomePage> {
                                               Text(
                                                 'Source: ${state.virusTotalData[index].source}\n'
                                                 'Total ${state.virusTotalData[index].harmless + state.virusTotalData[index].malicious + state.virusTotalData[index].suspicious + state.virusTotalData[index].timeout + state.virusTotalData[index].undetected}',
-                                                style: const TextStyle(
-                                                  color: mintGreen,
+                                                style: TextStyle(
+                                                  color:
+                                                      VtColorPalette.mintGreen,
                                                   fontSize: 15,
                                                 ),
                                               ),
                                               state.virusTotalData[index].isFile
                                                   ? Text(
                                                       'Undetached:${state.virusTotalData[index].undetected}',
-                                                      style: const TextStyle(
-                                                        color: malachite,
+                                                      style: TextStyle(
+                                                        color: VtColorPalette
+                                                            .malachite,
                                                         fontSize: 15,
                                                       ),
                                                     )
                                                   : Text(
                                                       'Harmless:${state.virusTotalData[index].harmless}',
-                                                      style: const TextStyle(
-                                                        color: malachite,
+                                                      style: TextStyle(
+                                                        color: VtColorPalette
+                                                            .malachite,
                                                         fontSize: 15,
                                                       ),
                                                     )

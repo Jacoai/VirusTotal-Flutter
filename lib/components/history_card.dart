@@ -14,18 +14,20 @@ class HistoryCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ExpansionTile(
-      backgroundColor: ultraViolet,
+      backgroundColor: VtColorPalette.ultraViolet,
       title: Text(
         virusTotalData.source,
         style: TextStyle(
-          color: (virusTotalData.malicious > 0) ? bringPink : malachite,
+          color: (virusTotalData.malicious > 0)
+              ? VtColorPalette.bringPink
+              : VtColorPalette.malachite,
           fontSize: 17,
         ),
       ),
       subtitle: Text(
         '${DateTime.fromMillisecondsSinceEpoch(virusTotalData.time * 1000)}',
-        style: const TextStyle(
-          color: mintGreen,
+        style: TextStyle(
+          color: VtColorPalette.mintGreen,
         ),
       ),
       children: [
@@ -36,7 +38,7 @@ class HistoryCard extends StatelessWidget {
                 title: Text('Harmless:${virusTotalData.harmless}'
                     '\nUndetected:${virusTotalData.undetected}\n'
                     'Timeout:${virusTotalData.timeout}'),
-                textColor: malachite,
+                textColor: VtColorPalette.malachite,
               ),
             ),
             Expanded(
@@ -44,7 +46,7 @@ class HistoryCard extends StatelessWidget {
               child: ListTile(
                 title: Text('Malicious:${virusTotalData.malicious}\n'
                     'Suspicious:${virusTotalData.suspicious}\n'),
-                textColor: bringPink,
+                textColor: VtColorPalette.bringPink,
               ),
             ),
           ],
@@ -70,7 +72,8 @@ class HistoryCard extends StatelessWidget {
                     },
                   );
                 },
-                child: const Icon(Icons.delete_rounded, color: bringPink),
+                child:
+                    Icon(Icons.delete_rounded, color: VtColorPalette.bringPink),
               ),
               ElevatedButton(
                 onPressed: () {
